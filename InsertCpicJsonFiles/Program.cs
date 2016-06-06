@@ -13,7 +13,9 @@ namespace InsertCpicJsonFiles
     {
         static void Main(string[] args)
         {
-            string elasticUrl = "http://localhost:9200/cpic/datatest/";
+            string url = "http://localhost:9200/";
+            string whereToSaveInElastic = "cpic/datatest/";
+            string elasticUrl = string.Format("{0}{1}", url, whereToSaveInElastic);
 
             Console.WriteLine("Copy and paste the file path to the folder that contains your json files.");
 
