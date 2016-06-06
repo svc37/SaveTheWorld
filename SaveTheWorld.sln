@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaveTheWorld", "SaveTheWorld\SaveTheWorld.csproj", "{0E5D1CB1-0C53-4E30-88AE-0B04A83CD39E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsertCpicJsonFiles", "InsertCpicJsonFiles\InsertCpicJsonFiles.csproj", "{E288CC0B-45A8-4DA0-8528-EF9C816D3C2D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{BB85FEC4-FBC3-4FEB-BE54-24E6DD37C17A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0A7A8DD8-D3FE-48D0-88FA-A11AB8701D95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
