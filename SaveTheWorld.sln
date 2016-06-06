@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaveTheWorld", "SaveTheWorld\SaveTheWorld.csproj", "{0E5D1CB1-0C53-4E30-88AE-0B04A83CD39E}"
 EndProject
@@ -9,7 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsertCpicJsonFiles", "Inse
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{BB85FEC4-FBC3-4FEB-BE54-24E6DD37C17A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0A7A8DD8-D3FE-48D0-88FA-A11AB8701D95}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{AF4EE6D9-C2DC-46DB-8E52-7387BEAEFA7E}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\Data\NDC\package.json = ..\..\Data\NDC\package.json
+		..\..\Data\NDC\package.txt = ..\..\Data\NDC\package.txt
+		..\..\Data\NDC\product.json = ..\..\Data\NDC\product.json
+		..\..\Data\NDC\product.txt = ..\..\Data\NDC\product.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
