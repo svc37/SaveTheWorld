@@ -1038,5 +1038,23 @@ namespace System
             return url.Host;
         }
 
+        public static string XmlToJson(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+
+
+                XmlDocument doc = new XmlDocument();
+                doc.Load(filePath);
+                string json = Newtonsoft.Json.JsonConvert.SerializeXmlNode(doc);
+                return json;
+            }
+            else
+            {
+                return "Path does not exist";
+            }
+
+        }
+
     }
 }

@@ -1,23 +1,18 @@
-﻿using SaveTheWorld.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InsertCpicJsonFiles
+namespace TestExtensions
 {
     class Program
     {
         static void Main(string[] args)
         {
-            string url = "http://localhost:9200/";
-            string whereToSaveInElastic = "cpic/datatest/";
-            string elasticUrl = string.Format("{0}{1}", url, whereToSaveInElastic);
 
-            Console.WriteLine("Copy and paste the file path to the folder that contains your json files.");
+            Console.WriteLine("Copy and paste the file path to the folder that contains your xml file.");
 
             string path = Console.ReadLine();
 
@@ -29,43 +24,22 @@ namespace InsertCpicJsonFiles
             }
 
             else
-
             {
 
                 if (Directory.Exists(path))
-
                 {
 
                     string[] jsonFiles = Directory.GetFiles(path);
 
-                    int id = 1;
-
                     foreach (var file in jsonFiles)
-
                     {
-
-                        elasticUrl = elasticUrl + id;
-
-                        byte[] data = File.ReadAllBytes(file);
-
-                        using (var client = new WebClient())
-
-                        {
-
-                            client.UploadData(elasticUrl, "PUT", data);
-
-                        }
-
-                        Console.WriteLine(file + " was successfully added to ElasticSearch");
-
-                        id++;
-
+                        path = path + "\\drugbank.xml";
+                        Extensions.XmlToJson(path);
                     }
 
                 }
 
                 else
-
                 {
 
                     Console.WriteLine("That directory doesn't exist.  Please double check that you copied the right one.");
@@ -75,6 +49,5 @@ namespace InsertCpicJsonFiles
             }
 
         }
-
     }
 }
