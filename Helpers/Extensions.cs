@@ -1040,19 +1040,29 @@ namespace System
 
         public static string XmlToJson(string filePath)
         {
-            if (File.Exists(filePath))
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    XmlDocument doc = new XmlDocument();
+
+                    doc.Load(filePath);
+                    byte[] bytes = Encoding.Default.GetBytes(doc.OuterXml);
+
+                    //string json = Newtonsoft.Json.JsonConvert.SerializeXmlNode(doc, Newtonsoft.Json.Formatting.Indented, true);
+                  var json =  SerializerExtensions.DeSerialze_Xml<string>(bytes);
+                    return json;
+                }
+                else
+                {
+                    return "Path does not exist";
+                }
+            }
+            catch (Exception e)
             {
 
-
-                XmlDocument doc = new XmlDocument();
-                doc.Load(filePath);
-                string json = Newtonsoft.Json.JsonConvert.SerializeXmlNode(doc);
-                return json;
             }
-            else
-            {
-                return "Path does not exist";
-            }
+            return "test";
 
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -24,7 +25,7 @@ namespace SaveTheWorld.Helpers
                     _collection = ConfigurationManager.AppSettings["ElasticCollection"];
                 }
 
-                return string.IsNullOrEmpty(_collection) ? "public" : _collection; 
+                return string.IsNullOrEmpty(_collection) ? "public" : _collection;
             }
         }
 
@@ -331,7 +332,7 @@ namespace SaveTheWorld.Helpers
 
             var action = new
             {
-                actions = new[] { 
+                actions = new[] {
                     new { remove = new { index=collection, alias = alias } }
                 }
             };
@@ -350,7 +351,7 @@ namespace SaveTheWorld.Helpers
 
             var action = new
             {
-                actions = new[] { 
+                actions = new[] {
                     new { add = new { index=collection, alias = alias } }
                 }
             };
@@ -369,7 +370,7 @@ namespace SaveTheWorld.Helpers
 
             var action = new
             {
-                actions = new object[] { 
+                actions = new object[] {
                     new { remove = new { index=collectionOld, alias = alias } },
                     new { add = new { index=collectionNew, alias = alias } }
                 }
@@ -380,6 +381,45 @@ namespace SaveTheWorld.Helpers
             req.ContentType = "application/x-www-form-urlencoded";
             req.Method = "POST";
             string s = req.GetResponseString(Newtonsoft.Json.JsonConvert.SerializeObject(action));
+
+        }
+
+        public static void InsertIntoElastic(string documentType, string[] jsonFiles)
+        {
+            //TODO: make these config values
+            string url = "http://localhost:9200/";
+            string whereToSaveInElastic = "data/" + documentType + "/";
+            string elasticUrl = string.Format("{0}{1}", url, whereToSaveInElastic);
+
+            int id = 1;
+
+            foreach (var file in jsonFiles)
+            {
+                elasticUrl = elasticUrl + id;
+
+                byte[] data = File.ReadAllBytes(file);
+
+                using (var client = new WebClient())
+                {
+                    client.UploadData(elasticUrl, "PUT", data);
+                }
+
+                Console.WriteLine(file + " was successfully added to ElasticSearch");
+
+                id++;
+            }
+        }
+
+        public static void InsertIntoElastic(string documentType)
+        {
+            //TODO: make these config values
+            string url = "http://localhost:9200/";
+            string whereToSaveInElastic = "data/" + documentType + "/";
+            string elasticUrl = string.Format("{0}{1}", url, whereToSaveInElastic);
+
+            if (documentType == "package")
+            {
+            }
 
         }
     }

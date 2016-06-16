@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaveTheWorld", "SaveTheWorld\SaveTheWorld.csproj", "{0E5D1CB1-0C53-4E30-88AE-0B04A83CD39E}"
 EndProject
@@ -15,9 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{AF4EE6D9-C
 		..\..\Data\NDC\package.txt = ..\..\Data\NDC\package.txt
 		..\..\Data\NDC\product.json = ..\..\Data\NDC\product.json
 		..\..\Data\NDC\product.txt = ..\..\Data\NDC\product.txt
+		test.json = test.json
+	EndProjectSection
+	ProjectSection(FolderGlobals) = preProject
+		__JSONSchema = 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestExtensions", "TestExtensions\TestExtensions.csproj", "{48786734-9F82-4F10-B558-DFB559F5F5AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsertPackageAndProductsIntoElastic", "InsertPackageAndProductsIntoElastic\InsertPackageAndProductsIntoElastic.csproj", "{95C4CAE6-FE12-426B-8DBE-C621159E8C7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +47,10 @@ Global
 		{48786734-9F82-4F10-B558-DFB559F5F5AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48786734-9F82-4F10-B558-DFB559F5F5AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48786734-9F82-4F10-B558-DFB559F5F5AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95C4CAE6-FE12-426B-8DBE-C621159E8C7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95C4CAE6-FE12-426B-8DBE-C621159E8C7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95C4CAE6-FE12-426B-8DBE-C621159E8C7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95C4CAE6-FE12-426B-8DBE-C621159E8C7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
