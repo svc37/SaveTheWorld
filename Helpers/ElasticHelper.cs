@@ -160,8 +160,6 @@ namespace SaveTheWorld.Helpers
             return retVal;
         }
 
-
-
         public static IEnumerable<t> Search<t>(string query, string scrollID, out SearchResults r)
         {
             return Search<t>(query, Collection, scrollID, out r);
@@ -387,6 +385,8 @@ namespace SaveTheWorld.Helpers
         public static void InsertIntoElastic(string documentType, string[] jsonFiles)
         {
             //TODO: make these config values
+            //TODO: use the new cpic class and set the ID properly 
+
             string url = "http://localhost:9200/";
             string whereToSaveInElastic = "data/" + documentType + "/";
             string elasticUrl = string.Format("{0}{1}", url, whereToSaveInElastic);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,42 +12,13 @@ namespace TestExtensions
     {
         static void Main(string[] args)
         {
+            string url = "http://localhost:9200/api/ElasticApi";
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(string.Format("{0}data/product/_bulk", url));
+            req.ContentType = "application/json";
+            req.Method = "PUT";
 
-            Console.WriteLine("Copy and paste the file path to the folder that contains your xml file.");
+            string s = req.GetResponseString(sb.ToString());
 
-            string path = Console.ReadLine();
-
-            if (string.IsNullOrEmpty(path))
-
-            {
-                Console.WriteLine("Bro, just paste the file path to the folder that contains your json files.  That's it.");
-
-            }
-
-            else
-            {
-
-                if (Directory.Exists(path))
-                {
-
-                    string[] jsonFiles = Directory.GetFiles(path);
-
-                    foreach (var file in jsonFiles)
-                    {
-                        path = path + "\\drugbank.xml";
-                        Extensions.XmlToJson(path);
-                    }
-
-                }
-
-                else
-                {
-
-                    Console.WriteLine("That directory doesn't exist.  Please double check that you copied the right one.");
-
-                }
-
-            }
 
         }
     }

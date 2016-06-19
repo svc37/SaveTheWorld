@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using SaveTheWorld.Helpers;
+using SaveTheWorld.InsertPackageAndProductsIntoElastic;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -51,11 +52,15 @@ namespace InsertPackageAndProductsIntoElastic
                         {
                             if (documentType == "package")
                             {
-                                PackageWork(path, url, whereToSaveInElastic, client);
+                                IEnumerable<Package> packages = JsonConvert.DeserializeObject<IEnumerable<Package>>(File.ReadAllText(path));
+                                Package.Save(packages);
+                                // PackageWork(path, url, whereToSaveInElastic, client);
                             }
                             if (documentType == "product")
                             {
-                                ProductWork(path, url, whereToSaveInElastic, client);
+                                // ProductWork(path, url, whereToSaveInElastic, client);
+                                IEnumerable<Product> products = JsonConvert.DeserializeObject<IEnumerable<Product>>(File.ReadAllText(path));
+                                Product.Save(products);
                             }
 
                         }
@@ -75,8 +80,8 @@ namespace InsertPackageAndProductsIntoElastic
 
         private static void PackageWork(string path, string url, string whereToSaveInElastic, WebClient client)
         {
-            IEnumerable<SaveTheWorld.InsertPackageAndProductsIntoElastic.Package> packages = JsonConvert.DeserializeObject<IEnumerable<SaveTheWorld.InsertPackageAndProductsIntoElastic.Package>>(File.ReadAllText(path));
-            foreach (SaveTheWorld.InsertPackageAndProductsIntoElastic.Package package in packages)
+            IEnumerable<Package> packages = JsonConvert.DeserializeObject<IEnumerable<Package>>(File.ReadAllText(path));
+            foreach (Package package in packages)
             {
                 //TODO: double check the NdcPackageCode
                 string ndcPackageCode = package.NdcPackageCode;
@@ -104,8 +109,8 @@ namespace InsertPackageAndProductsIntoElastic
 
         private static void ProductWork(string path, string url, string whereToSaveInElastic, WebClient client)
         {
-            IEnumerable<SaveTheWorld.InsertPackageAndProductsIntoElastic.Product> products = JsonConvert.DeserializeObject<IEnumerable<SaveTheWorld.InsertPackageAndProductsIntoElastic.Product>>(File.ReadAllText(path));
-            foreach (SaveTheWorld.InsertPackageAndProductsIntoElastic.Product product in products)
+            IEnumerable<Product> products = JsonConvert.DeserializeObject<IEnumerable<Product>>(File.ReadAllText(path));
+            foreach (Product product in products)
             {
                 //TODO: double check the NdcPackageCode
                 string productId = product.ProductId;
