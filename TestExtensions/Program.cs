@@ -17,7 +17,7 @@ namespace TestExtensions
             req.ContentType = "application/json";
             req.Method = "PUT";
 
-            string s = req.GetResponseString(sb.ToString());
+           // string s = req.GetResponseString(sb.ToString());
 
 
         }
