@@ -121,6 +121,12 @@
     <Compile Include="SerializerExtensions.cs" />
     <Compile Include="WebExtensions.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PdbMClasses\PdbMClasses.csproj">
+      <Project>{447a413d-2e87-4984-92bc-f0d06f66e247}</Project>
+      <Name>PdbMClasses</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

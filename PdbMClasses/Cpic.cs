@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace SaveTheWorld.Models
+namespace PdbMClasses
 {
+    [Serializable]
     public class Cpic
     {
         public string objCls { get; set; }
@@ -78,19 +80,4 @@ namespace SaveTheWorld.Models
         public string symbol { get; set; }
         public string name { get; set; }
     }
-
-    //public class Example
-    //{
-    //    public string objCls { get; set; }
-    //    public string @id { get; set; }
-    //    public string context { get; set; }
-    //    public string id { get; set; }
-    //    public string name { get; set; }
-    //    public IEnumerable<Group> groups { get; set; }
-    //    public IEnumerable<RelatedChemical> relatedChemicals { get; set; }
-    //    public IEnumerable<RelatedGene> relatedGenes { get; set; }
-    //    public string source { get; set; }
-    //    public string summaryHtml { get; set; }
-    //    public string textHtml { get; set; }
-    //}
 }

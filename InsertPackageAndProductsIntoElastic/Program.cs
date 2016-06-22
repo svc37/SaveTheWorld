@@ -1,16 +1,9 @@
 ﻿using Newtonsoft.Json;
+using PdbMClasses;
 using SaveTheWorld.Helpers;
-using SaveTheWorld.InsertPackageAndProductsIntoElastic;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Serialization;
 
 namespace InsertPackageAndProductsIntoElastic
 {
@@ -43,26 +36,17 @@ namespace InsertPackageAndProductsIntoElastic
                 {
                     if (File.Exists(path))
                     {
-                        string url = "http://localhost:9200/";
                         string whereToSaveInElastic = "data/" + documentType + "/";
 
-
-
-                        using (var client = new WebClient())
+                        if (documentType == "package")
                         {
-                            if (documentType == "package")
-                            {
-                                IEnumerable<Package> packages = JsonConvert.DeserializeObject<IEnumerable<Package>>(File.ReadAllText(path));
-                                Package.Save(packages);
-                                // PackageWork(path, url, whereToSaveInElastic, client);
-                            }
-                            if (documentType == "product")
-                            {
-                                // ProductWork(path, url, whereToSaveInElastic, client);
-                                IEnumerable<Product> products = JsonConvert.DeserializeObject<IEnumerable<Product>>(File.ReadAllText(path));
-                                Product.Save(products);
-                            }
-
+                            IEnumerable<Package> packages = JsonConvert.DeserializeObject<IEnumerable<Package>>(File.ReadAllText(path));
+                            ElasticHelper.InsertIntoElastic(packages);
+                        }
+                        if (documentType == "product")
+                        {
+                            IEnumerable<Product> products = JsonConvert.DeserializeObject<IEnumerable<Product>>(File.ReadAllText(path));
+                            ElasticHelper.InsertIntoElastic(products);
                         }
 
                     }
@@ -76,64 +60,6 @@ namespace InsertPackageAndProductsIntoElastic
                 }
 
             }
-        }
-
-        private static void PackageWork(string path, string url, string whereToSaveInElastic, WebClient client)
-        {
-            IEnumerable<Package> packages = JsonConvert.DeserializeObject<IEnumerable<Package>>(File.ReadAllText(path));
-            foreach (Package package in packages)
-            {
-                //TODO: double check the NdcPackageCode
-                string ndcPackageCode = package.NdcPackageCode;
-                string elasticUrl = string.Format("{0}{1}", url, whereToSaveInElastic);
-
-                elasticUrl = elasticUrl + ndcPackageCode;
-
-                try
-                {
-                    string s = JsonConvert.SerializeObject(package);
-
-                    client.UploadString(elasticUrl, "PUT", s);
-                    Console.WriteLine("Successfully added to ElasticSearch");
-
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message.ToString());
-
-                }
-
-            }
-
-        }
-
-        private static void ProductWork(string path, string url, string whereToSaveInElastic, WebClient client)
-        {
-            IEnumerable<Product> products = JsonConvert.DeserializeObject<IEnumerable<Product>>(File.ReadAllText(path));
-            foreach (Product product in products)
-            {
-                //TODO: double check the NdcPackageCode
-                string productId = product.ProductId;
-                string elasticUrl = string.Format("{0}{1}", url, whereToSaveInElastic);
-
-                elasticUrl = elasticUrl + productId;
-
-                try
-                {
-                    string s = JsonConvert.SerializeObject(product);
-
-                    client.UploadString(elasticUrl, "PUT", s);
-                    Console.WriteLine("Successfully added to ElasticSearch");
-
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message.ToString());
-
-                }
-
-            }
-
         }
 
     }

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CombineCpicWithSynonyms
+namespace PdbMClasses
 {
     [Serializable]
-    class Synonyms
+    public class Synonyms
     {
         public string name { get; set; }
         public IEnumerable<Salt> salts { get; set; }
@@ -29,12 +29,5 @@ namespace CombineCpicWithSynonyms
             public string name { get; set; }
         }
 
-        //public class Example
-        //{
-        //    public string name { get; set; }
-        //    public IEnumerable<Salt> salts { get; set; }
-        //    public IEnumerable<Synonym> synonyms { get; set; }
-        //    public IEnumerable<Brand> brands { get; set; }
-        //}
     }
 }

@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace SaveTheWorld.Models
+namespace PdbMClasses
 {
+    [Serializable]
     public class Product
     {
         public string ProductId { get; set; }
@@ -25,5 +28,7 @@ namespace SaveTheWorld.Models
         public string Active_Ingred_Unit { get; set; }
         public string Pharm_Classes { get; set; }
         public string Deaschedule { get; set; }
+
     }
+
 }

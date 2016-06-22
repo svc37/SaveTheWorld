@@ -16,8 +16,8 @@ namespace SaveTheWorld
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                routeTemplate: "api/{controller}/{ndcNumber}",
+                defaults: new { ndcNumber = RouteParameter.Optional }
             );
         }
     }

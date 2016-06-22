@@ -9,23 +9,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsertCpicJsonFiles", "Inse
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{BB85FEC4-FBC3-4FEB-BE54-24E6DD37C17A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{AF4EE6D9-C2DC-46DB-8E52-7387BEAEFA7E}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\Data\NDC\package.json = ..\..\Data\NDC\package.json
-		..\..\Data\NDC\package.txt = ..\..\Data\NDC\package.txt
-		..\..\Data\NDC\product.json = ..\..\Data\NDC\product.json
-		..\..\Data\NDC\product.txt = ..\..\Data\NDC\product.txt
-		test.json = test.json
-	EndProjectSection
-	ProjectSection(FolderGlobals) = preProject
-		__JSONSchema = 
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestExtensions", "TestExtensions\TestExtensions.csproj", "{48786734-9F82-4F10-B558-DFB559F5F5AD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsertPackageAndProductsIntoElastic", "InsertPackageAndProductsIntoElastic\InsertPackageAndProductsIntoElastic.csproj", "{95C4CAE6-FE12-426B-8DBE-C621159E8C7C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CombineCpicWithSynonyms", "CombineCpicWithSynonyms\CombineCpicWithSynonyms.csproj", "{8838E1A4-AB27-4E00-84B4-2024E52077E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdbMClasses", "PdbMClasses\PdbMClasses.csproj", "{447A413D-2E87-4984-92BC-F0D06F66E247}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +47,10 @@ Global
 		{8838E1A4-AB27-4E00-84B4-2024E52077E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8838E1A4-AB27-4E00-84B4-2024E52077E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8838E1A4-AB27-4E00-84B4-2024E52077E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{447A413D-2E87-4984-92BC-F0D06F66E247}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{447A413D-2E87-4984-92BC-F0D06F66E247}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{447A413D-2E87-4984-92BC-F0D06F66E247}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{447A413D-2E87-4984-92BC-F0D06F66E247}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

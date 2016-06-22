@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using PdbMClasses;
 
 namespace CombineCpicWithSynonyms
 {
@@ -42,7 +43,6 @@ namespace CombineCpicWithSynonyms
                         string fileName = file.Substring(index);
 
 
-
                         IEnumerable<Synonyms> syns = JsonConvert.DeserializeObject<IEnumerable<Synonyms>>(File.ReadAllText(@"C:\Code\Data\DrugSynonyms\DrugSynonyms.json"));
                         foreach (Synonyms syn in syns)
                         {
@@ -71,7 +71,7 @@ namespace CombineCpicWithSynonyms
                             }
                             else
                             {
-                                File.WriteAllText(@"C:\Code\Data\CpicTest\" + fileName, JsonConvert.SerializeObject(rss, Formatting.Indented));
+                             //   File.WriteAllText(@"C:\Code\Data\CpicTest\" + fileName, JsonConvert.SerializeObject(rss, Formatting.Indented));
                             }
                         }
 

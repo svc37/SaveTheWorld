@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using PdbMClasses;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -384,43 +386,124 @@ namespace SaveTheWorld.Helpers
 
         public static void InsertIntoElastic(string documentType, string[] jsonFiles)
         {
-            //TODO: make these config values
-            //TODO: use the new cpic class and set the ID properly 
-
-            string url = "http://localhost:9200/";
-            string whereToSaveInElastic = "data/" + documentType + "/";
-            string elasticUrl = string.Format("{0}{1}", url, whereToSaveInElastic);
-
-            int id = 1;
-
-            foreach (var file in jsonFiles)
+            using (var client = new WebClient())
             {
-                elasticUrl = elasticUrl + id;
-
-                byte[] data = File.ReadAllBytes(file);
-
-                using (var client = new WebClient())
+                foreach (var file in jsonFiles)
                 {
+                    JObject j = JObject.Parse(File.ReadAllText(file));
+                    string id = j["id"].ToString();
+                    string url = ElasticURL.ToString();
+                    string elasticUrl = string.Format("{0}data/{1}/", url, documentType);
+                    elasticUrl = elasticUrl + id;
+                    byte[] data = File.ReadAllBytes(file);
+
                     client.UploadData(elasticUrl, "PUT", data);
+
+
+                    Console.WriteLine(file + " was successfully added to ElasticSearch");
                 }
-
-                Console.WriteLine(file + " was successfully added to ElasticSearch");
-
-                id++;
             }
         }
 
-        public static void InsertIntoElastic(string documentType)
+        public static string InsertIntoElastic(IEnumerable<Package> packages)
         {
             //TODO: make these config values
-            string url = "http://localhost:9200/";
-            string whereToSaveInElastic = "data/" + documentType + "/";
-            string elasticUrl = string.Format("{0}{1}", url, whereToSaveInElastic);
+            string url = ElasticURL.ToString();
 
-            if (documentType == "package")
+            if (packages != null && packages.Count() > 0)
             {
-            }
+                StringBuilder sb = new StringBuilder();
+                int numLines = 0;
+                string eh = string.Empty;
+                foreach (Package p in packages)
+                {
+                    try
+                    {
+                        DateTime start = DateTime.Now;
+                        sb.AppendLine(string.Format("{{ \"index\": {{ \"_id\":\"{0}\" }} }}", p.NdcPackageCode));
+                        sb.AppendLine(Newtonsoft.Json.JsonConvert.SerializeObject(p, Newtonsoft.Json.Formatting.None, new Newtonsoft.Json.JsonSerializerSettings { NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore }));
+                        numLines++;
 
+                        if (numLines == 10000)
+                        {
+                            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(string.Format("{0}data/package/_bulk", url));
+                            req.ContentType = "application/json";
+                            req.Method = "PUT";
+
+                            eh = req.GetResponseString(sb.ToString());
+                            Console.WriteLine(String.Format("sent {0} records in {1}", numLines, DateTime.Now - start));
+                            sb.Clear();
+                            numLines = 0;
+
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        return e.Message;
+                    }
+                }
+
+                if (!String.IsNullOrEmpty(eh))
+                {
+                    HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(string.Format("{0}data/package/_bulk", url));
+                    req.ContentType = "application/json";
+                    req.Method = "PUT";
+
+                    eh = req.GetResponseString(sb.ToString());
+                }
+                return eh;
+            }
+            return "";
+        }
+
+        public static string InsertIntoElastic(IEnumerable<Product> products)
+        {
+            string url = ElasticURL.ToString();
+
+            if (products != null && products.Count() > 0)
+            {
+                StringBuilder sb = new StringBuilder();
+                int numLines = 0;
+                string eh = string.Empty;
+                foreach (Product p in products)
+                {
+                    try
+                    {
+                        DateTime start = DateTime.Now;
+                        sb.AppendLine(string.Format("{{ \"index\": {{ \"_id\":\"{0}\" }} }}", p.ProductId));
+                        sb.AppendLine(Newtonsoft.Json.JsonConvert.SerializeObject(p, Newtonsoft.Json.Formatting.None, new Newtonsoft.Json.JsonSerializerSettings { NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore }));
+                        numLines++;
+
+                        if (numLines == 10000)
+                        {
+                            HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(string.Format("{0}data/product/_bulk", url));
+                            req.ContentType = "application/json";
+                            req.Method = "PUT";
+
+                            eh = req.GetResponseString(sb.ToString());
+                            Console.WriteLine(string.Format("sent {0} records in {1}", numLines, DateTime.Now - start));
+                            sb.Clear();
+                            numLines = 0;
+
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        return e.Message.ToString();
+                    }
+                }
+
+                if (!String.IsNullOrEmpty(eh))
+                {
+                    HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(string.Format("{0}data/product/_bulk", url));
+                    req.ContentType = "application/json";
+                    req.Method = "PUT";
+
+                    eh = req.GetResponseString(sb.ToString());
+                }
+                return eh;
+            }
+            return "";
         }
     }
 }
